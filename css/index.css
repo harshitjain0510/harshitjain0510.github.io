@@ -1,10 +1,8 @@
 body {
-      text-align:center;
-      background:url('/images/wall.gif') no-repeat center center fixed;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover; 
+    background-image: url('/images/wall.gif');
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
     }
 
 body div{
