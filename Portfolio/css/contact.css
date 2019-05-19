@@ -46,7 +46,7 @@ nav ul li a:hover{
 }
 
 body{
-	background-image: url('images/wall.gif');
+	background-image: url('/images/wall.gif');
 	background-size: cover;
 	background-attachment: scroll;
 	padding-bottom: 0px;
