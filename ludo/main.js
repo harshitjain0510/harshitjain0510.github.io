@@ -9,49 +9,103 @@ var k = 0;
 var l = 0;
 var boxs = document.getElementsByClassName("box");
 var bxs =[];
+var bxsb =[];
 var i=0;
+var indx = [-1,-1,-1,-1];
 
 for( ;i<6;++i){
 	bxs[i]=boxs[i];
+	bxsb[i+10]=boxs[i];
 }
 
 for (var j=19 ; i <10 ; i++,j--) {
 	bxs[j]=boxs[i];
+	bxsb[j-10]=bxs[j];
 }
 
-for (var j=6 ; i < 14; i++,j++) {
+for (var j=6 ; i < 14; i++,j++){
 	bxs[j]=boxs[i];
+	bxsb[j+10]=bxs[j];
 }
 
-for (var j = 15; i < 20; i++,j--) {
+for (var j = 15; i < 20; i++,j--){
 	bxs[j]=boxs[i]
+	bxsb[j-10]=bxs[j];
 }
+var i=0;
+var j=0;
+
 roll.onclick = function(){
+	var ulk=-1;
 	if(chance[0].innerHTML == "TURN A"){
 		chance[0].innerHTML = "TURN B";
 	}
 	else
 		chance[0].innerHTML = "TURN A";
 	rdm[0].innerHTML = 1+ (Math.floor(6 * (Math.random())));
+
 	if(rdm[0].innerHTML == 6){
-		var ulk = unlock();
+		ulk = unlock();
+	}
+
+	if (ulk == 1 && indx[0] >= 0){
+		indx[1] = 0;
+	}
+	else if(ulk==1)
+		indx[0] = 0;
+
+	if (ulk == 2 && indx[2] >= 0){
+		indx[3] = 0;
+	}
+	else if(ulk ==2)
+		indx[2] = 0;
+
+	if((ulk == 0 || ulk==-1)&& indx[0]>=0 && indx[0]<19 && (indx[0]+parseInt(rdm[0].innerHTML))<=19 && chance[0].innerHTML == "TURN A"){
+		var aa=document.getElementById("a1");
+		document.getElementById("a1").remove();
+		indx[0] = indx[0] + parseInt(rdm[0].innerHTML);
+		bxs[indx[0]].appendChild(aa);
+	}
+	else if ((ulk == 0 || ulk==-1) && indx[1]>=0 && indx[1]<19 && (indx[1]+parseInt(rdm[0].innerHTML))<=19 && chance[0].innerHTML == "TURN A") {
+		var ab=document.getElementById("a2");
+		document.getElementById("a2").remove();
+		indx[1] = indx[1] + parseInt(rdm[0].innerHTML);
+		bxs[indx[1]].appendChild(ab);
+	}
+	else if((ulk == 0 || ulk==-1)&& indx[2]>=0 && indx[2]<19 && (indx[2]+parseInt(rdm[0].innerHTML))<=19 && chance[0].innerHTML == "TURN B"){
+		var ba=document.getElementById("b1");
+		document.getElementById("b1").remove();
+		indx[2] = indx[2] + parseInt(rdm[0].innerHTML);
+		bxsb[indx[2]].appendChild(ba);
+	}
+	else if ((ulk == 0 || ulk==-1) && indx[3]>=0 && indx[3]<19 && (indx[3]+parseInt(rdm[0].innerHTML))<=19 && chance[0].innerHTML == "TURN B") {
+		var bb=document.getElementById("b2");
+		document.getElementById("b2").remove();
+		indx[3] = indx[3] + parseInt(rdm[0].innerHTML);
+		bxsb[indx[3]].appendChild(bb);
+	}
+
+	if(indx[0]==19 && indx[1]==19){
+		document.getElementsByClassName("master")[0].innerHTML="A wins";
+	}
+
+	if(indx[3]==19 && indx[2]==19){
+		document.getElementsByClassName("master")[0].innerHTML="B wins";
 	}
 };
 
 function unlock(){
-	var i = 0;
-	var j=0;
-	if(chance[0].innerHTML == "TURN A" && k<2){
-		a[i++].remove();
-		k++;
-		document.getElementsByClassName("box")[0].appendChild(a[i-1]);
+	if(chance[0].innerHTML == "TURN A" && k<2 && (indx[0]<0 || indx[1]<0)){
+		var t=a[k];
+		a[k].remove();
+		document.getElementsByClassName("box")[0].appendChild(t);
 		return 1;
 	}
-
-	if(chance[0].innerHTML == "TURN B" && l<2){
-		b[j++].remove();
+	else if(chance[0].innerHTML == "TURN B" && l<2){
+		var t=b[l];
+		b[l].remove();
 		l++;
-		document.getElementsByClassName("box")[1].appendChild(b[i-1]);
+		document.getElementsByClassName("box")[19].appendChild(t);
 		return 2;
 	}	
 	return 0;	
