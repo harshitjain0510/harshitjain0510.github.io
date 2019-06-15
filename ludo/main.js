@@ -37,11 +37,7 @@ var j=0;
 
 roll.onclick = function(){
 	var ulk=-1;
-	if(chance[0].innerHTML == "TURN A"){
-		chance[0].innerHTML = "TURN B";
-	}
-	else
-		chance[0].innerHTML = "TURN A";
+
 	rdm[0].innerHTML = 1+ (Math.floor(6 * (Math.random())));
 
 	if(rdm[0].innerHTML == 6){
@@ -85,11 +81,19 @@ roll.onclick = function(){
 		bxsb[indx[3]].appendChild(bb);
 	}
 
+	if(chance[0].innerHTML == "TURN A" && rdm[0].innerHTML != "6"){
+		chance[0].innerHTML = "TURN B";
+	}
+	else if(chance[0].innerHTML == "TURN B" && rdm[0].innerHTML != "6")
+		chance[0].innerHTML = "TURN A";
+
 	if(indx[0]==19 && indx[1]==19){
+		alert("A wins");
 		document.getElementsByClassName("master")[0].innerHTML="A wins";
 	}
 
 	if(indx[3]==19 && indx[2]==19){
+		alert("B wins");
 		document.getElementsByClassName("master")[0].innerHTML="B wins";
 	}
 };
