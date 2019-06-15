@@ -56,7 +56,7 @@ roll.onclick = function(){
 	else if(ulk ==2)
 		indx[2] = 0;
 
-	if((ulk == 0 || ulk==-1)&& indx[0]>=0 && indx[0]<19 && (indx[0]+parseInt(rdm[0].innerHTML))<=19 && chance[0].innerHTML == "TURN A"){
+	if((ulk == 0 || ulk==-1) && indx[0]>=0 && indx[0]<19 && (indx[0]+parseInt(rdm[0].innerHTML))<=19 && chance[0].innerHTML == "TURN A"){
 		var aa=document.getElementById("a1");
 		document.getElementById("a1").remove();
 		indx[0] = indx[0] + parseInt(rdm[0].innerHTML);
@@ -79,6 +79,46 @@ roll.onclick = function(){
 		document.getElementById("b2").remove();
 		indx[3] = indx[3] + parseInt(rdm[0].innerHTML);
 		bxsb[indx[3]].appendChild(bb);
+	}
+
+	if ((bxs[indx[0]]==bxsb[indx[2]] || bxs[indx[0]]==bxsb[indx[3]]) && indx[0]!==indx[1] && indx[0]!== -1){
+		if (chance[0].innerHTML == "TURN B") {
+			var aa=document.getElementById("a1");
+			alert("B killed A");
+			document.getElementById("a1").remove();
+			locker[0].appendChild(aa);
+			indx[0]=-1;
+		}
+	}
+
+	if ((bxs[indx[1]]==bxsb[indx[2]] || bxs[indx[1]]==bxsb[indx[3]]) && indx[0]!==indx[1] && indx[1]!== -1){
+		if (chance[0].innerHTML == "TURN B") {
+			var ab=document.getElementById("a2");
+			alert("B killed A");
+			document.getElementById("a2").remove();
+			locker[0].appendChild(ab);
+			indx[1]=-1;
+		}
+	}
+
+	if ((bxsb[indx[2]]==bxs[indx[0]] || bxsb[indx[2]]==bxs[indx[1]]) && indx[3]!==indx[2] && indx[2]!== -1){
+		if (chance[0].innerHTML == "TURN A") {
+			var ba=document.getElementById("b1");
+			alert("A killed B");
+			document.getElementById("b1").remove();
+			locker[1].appendChild(ba);
+			indx[2]=-1;
+		}
+	}
+
+	if ((bxsb[indx[3]]==bxs[indx[0]] || bxsb[indx[3]]==bxs[indx[1]]) && indx[3]!==indx[2] && indx[3]!== -1){
+		if (chance[0].innerHTML == "TURN A") {
+			var bb=document.getElementById("b2");
+			alert("A killed B");
+			document.getElementById("b2").remove();
+			locker[1].appendChild(bb);
+			indx[3]=-1;
+		}
 	}
 
 	if(chance[0].innerHTML == "TURN A" && rdm[0].innerHTML != "6"){
