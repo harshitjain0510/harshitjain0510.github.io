@@ -12,6 +12,8 @@ var bxs =[];
 var bxsb =[];
 var i=0;
 var indx = [-1,-1,-1,-1];
+var snd = new Audio();
+snd.src= "Die.mp3";
 
 for( ;i<6;++i){
 	bxs[i]=boxs[i];
@@ -36,6 +38,7 @@ var i=0;
 var j=0;
 
 roll.onclick = function(){
+	snd.play();
 	var ulk=-1;
 
 	rdm[0].innerHTML = 1+ (Math.floor(6 * (Math.random())));
