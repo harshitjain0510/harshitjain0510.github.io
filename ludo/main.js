@@ -14,6 +14,10 @@ var i=0;
 var indx = [-1,-1,-1,-1];
 var snd = new Audio();
 snd.src= "Die.mp3";
+var w=0;
+var x=0;
+var y=0;
+var z=0;
 
 for( ;i<6;++i){
 	bxs[i]=boxs[i];
@@ -122,6 +126,27 @@ roll.onclick = function(){
 			locker[1].appendChild(bb);
 			indx[3]=-1;
 		}
+	}
+
+	if(indx[0]==19 && w==0){
+		alert("one token of A leaves the board");
+		document.getElementById("a1").remove();
+		w++;
+	}
+	if(indx[1]==19 && x==0){
+		alert("one token of A leaves the board");
+		document.getElementById("a2").remove();
+		x++;
+	}
+	if(indx[2]==19 && y==0){
+		alert("one token of B leaves the board");
+		document.getElementById("b1").remove();
+		y++;
+	}
+	if(indx[3]==19 && z==0){
+		alert("one token of B leaves the board");
+		document.getElementById("b2").remove();
+		z++;
 	}
 
 	if(chance[0].innerHTML == "TURN A" && rdm[0].innerHTML != "6"){
